@@ -16,6 +16,7 @@ class CreateInvoiceProductsinwarehousesTable extends Migration
         Schema::create('invoice_productsinwarehouses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('quantity');
+            $table->integer('warehouse_id');
             $table->timestamps();
         });
     }

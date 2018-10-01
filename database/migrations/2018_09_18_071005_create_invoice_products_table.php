@@ -17,6 +17,7 @@ class CreateInvoiceProductsTable extends Migration
             $table->increments('id');
              $table->strings('name');
             $table->integer('price');
+             $table->integer('warehouse_id');
             $table->strings('quantity');
             $table->timestamps();
         });
