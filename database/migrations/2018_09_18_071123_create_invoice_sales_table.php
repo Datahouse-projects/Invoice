@@ -16,7 +16,7 @@ class CreateInvoiceSalesTable extends Migration
         Schema::create('invoice_sales', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id');
-            $table->integer('employeeid');
+            $table->integer('employee_id');
             $table->timestamps();
         });
     }
