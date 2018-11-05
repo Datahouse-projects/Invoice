@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Invoice;
 class InvoicessController extends Controller
 {
     /**
@@ -11,9 +11,11 @@ class InvoicessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     public function index()
     {
-        //
+    
+        $invoices= Invoice::latest()->paginate(5);
+        return view('invoices.index', compact('invoices'))->with('i',(request()->input('page',1) -1)*5);
     }
 
     /**
@@ -23,7 +25,7 @@ class InvoicessController extends Controller
      */
     public function create()
     {
-        //
+      return view('invoices.create');
     }
 
     /**
@@ -34,7 +36,13 @@ class InvoicessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         request()->validate([
+         'customer_id' => 'required',
+         'invoice_date' =>  'required',
+          'employee_id' => 'required',
+        ]);
+     Invoice::create($request->all());
+     return redirect()->route('invoices.index')->with('success','Invoices created successfully');
     }
 
     /**
@@ -45,7 +53,8 @@ class InvoicessController extends Controller
      */
     public function show($id)
     {
-        //
+         $invoices = Invoice::find($id);
+        return view('invoices.show', compact('invoice'));
     }
 
     /**
@@ -56,7 +65,8 @@ class InvoicessController extends Controller
      */
     public function edit($id)
     {
-        //
+         $invoices = Invoice::find($id);
+        return view('invoices.edit', compact('invoice'));
     }
 
     /**
@@ -68,7 +78,13 @@ class InvoicessController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+         'customer_id' => 'required',
+         'invoice_date' =>  'required',
+          'employee_id' => 'required',
+        ]);
+     Invoice::find($id)->update($request->all());
+     return redirect()->route('invoices.index')->with('success','Invoices Updated successfully');
     }
 
     /**
@@ -79,6 +95,7 @@ class InvoicessController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Invoice::find($id)->delete();
+        return redirect()->route('invoices.index')->with('success', 'Invoice deleted successfully');   
     }
 }

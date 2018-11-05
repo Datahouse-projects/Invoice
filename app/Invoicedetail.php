@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Invoicedetail extends Model
-{
+{  
+	protected $table = 'invoice_invoicedetails';
       protected $fillable = [
-        'invoicedetail_id', 'product_id',
-        'quantity', 'warehouse',
+        'product_id' => 'required',
+        'quantity' => 'required',   
+        'warehouse_id' => 'required', 
     ];
 
 }

@@ -15,8 +15,8 @@ class CreateInvoiceEmployeesTable extends Migration
     {
         Schema::create('invoice_employees', function (Blueprint $table) {
             $table->increments('id');
-            $table->strings('name');
-            $table->strings('secondname');
+            $table->string('name');
+            $table->string('secondname');
             $table->timestamps();
         });
     }

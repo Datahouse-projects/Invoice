@@ -15,7 +15,7 @@ class CreateInvoiceWarehousesTable extends Migration
     {
         Schema::create('invoice_warehouses', function (Blueprint $table) {
             $table->increments('id');
-            $table->strings('name');
+            $table->string('name');
             $table->timestamps();
         });
     }

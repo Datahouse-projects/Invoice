@@ -1,4 +1,4 @@
-<?php
+N<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,7 +15,7 @@ class CreateInvoiceCustomersTable extends Migration
     {
         Schema::create('invoice_customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->strings('name');
+            $table->string('name');
             $table->integer('phone');
             $table->timestamps();
         });

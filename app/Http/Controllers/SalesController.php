@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
-class SalessController extends Controller
+use App\Sale;
+class SalesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +12,8 @@ class SalessController extends Controller
      */
     public function index()
     {
-        //
+        $sales= Sale::latest()->paginate(5);
+        return view('sales.index',compact('sales'))->with('i',(request()->input('page',1) -1) *5);
     }
 
     /**
@@ -23,7 +23,7 @@ class SalessController extends Controller
      */
     public function create()
     {
-        //
+    return view('sales.create');
     }
 
     /**
@@ -34,7 +34,12 @@ class SalessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+         'product_id' => 'required',
+         'employee_id' => 'required',            
+            ]);
+        Sale::create($request->all());
+        return redirect()->route('sales.index')->with('success','Sales created successfull');
     }
 
     /**
@@ -45,7 +50,8 @@ class SalessController extends Controller
      */
     public function show($id)
     {
-        //
+        $sale = Sale::find($id);
+        return view('sales.show', compact('sale'));
     }
 
     /**
@@ -56,7 +62,9 @@ class SalessController extends Controller
      */
     public function edit($id)
     {
-        //
+      $sale = Sale::find($id);
+      return view('sales.edit', compact('sale'));
+
     }
 
     /**
@@ -68,7 +76,12 @@ class SalessController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          request()->validate([
+         'product_id' => 'required',
+         'employee_id' =>  'required',
+            ]);
+            Sale::find($id)->updated($request->all());
+            return redirect()->route('sales.index')->with('success','Post Updated successfully');
     }
 
     /**
@@ -79,6 +92,7 @@ class SalessController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        Sale::find($id)->delete();
+        return redirect()->route('sales.index')->with('success', 'Sale deleted successfully');
+}
 }

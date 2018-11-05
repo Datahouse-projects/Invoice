@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Warehouse;
 class WarehousesController extends Controller
 {
     /**
@@ -11,9 +11,10 @@ class WarehousesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+      public function index()
     {
-        //
+        $warehouses= Warehouse::latest()->paginate(5);
+        return view('warehouses.index',compact('warehouses'))->with('i',(request()->input('page',1) -1) *5);
     }
 
     /**
@@ -23,7 +24,7 @@ class WarehousesController extends Controller
      */
     public function create()
     {
-        //
+    return view('warehouses.create');
     }
 
     /**
@@ -34,7 +35,11 @@ class WarehousesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+         'name' => 'required',            
+            ]);
+        Warehouse::create($request->all());
+        return redirect()->route('warehouses.index')->with('success','Warehouse created successfull');
     }
 
     /**
@@ -45,7 +50,8 @@ class WarehousesController extends Controller
      */
     public function show($id)
     {
-        //
+        $Warehouse = Sale::find($id);
+        return view('warehouses.show', compact('Warehouse'));
     }
 
     /**
@@ -56,7 +62,9 @@ class WarehousesController extends Controller
      */
     public function edit($id)
     {
-        //
+      $sale = Sale::find($id);
+      return view('warehouses.edit', compact('Warehouse'));
+
     }
 
     /**
@@ -68,7 +76,12 @@ class WarehousesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          request()->validate([
+         'warehouses' => 'required',
+         
+            ]);
+            Warehouse::find($id)->updated($request->all());
+            return redirect()->route('warehouse.index')->with('success','Warehouse Updated successfully');
     }
 
     /**
@@ -79,6 +92,7 @@ class WarehousesController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        Sale::find($id)->delete();
+        return redirect()->route('Warehouse.index')->with('success', 'Warehouse deleted successfully');
+}
 }

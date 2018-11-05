@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Customer;
 class CustomersController extends Controller
 {
     /**
@@ -13,7 +13,9 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        //
+    
+        $customers= Customer::latest()->paginate(5);
+        return view('customers.index', compact('customers'))->with('i',(request()->input('page',1) -1)*5);
     }
 
     /**
@@ -23,7 +25,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        //
+      return view('customers.create');
     }
 
     /**
@@ -34,7 +36,12 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         request()->validate([
+         'name' => 'required',
+         'phone' =>  'required',
+        ]);
+     Customer::create($request->all());
+     return redirect()->route('customers.index')->with('success','Customer created successfully');
     }
 
     /**
@@ -45,7 +52,8 @@ class CustomersController extends Controller
      */
     public function show($id)
     {
-        //
+         $customer = Customer::find($id);
+        return view('customers.show', compact('customer'));
     }
 
     /**
@@ -56,7 +64,8 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        //
+         $customer = Customer::find($id);
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -68,7 +77,12 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+        'name' => 'required',
+         'phone' =>  'required',
+        ]);
+     Customer::find($id)->update($request->all());
+     return redirect()->route('customers.index')->with('success','Customer Updated successfully');
     }
 
     /**
@@ -79,6 +93,7 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Customer::find($id)->delete();
+        return redirect()->route('customers.index')->with('success', 'Customer deleted successfully');   
     }
 }

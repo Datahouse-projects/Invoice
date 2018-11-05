@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
+
+	 protected $table ='invoice_sales';
        protected $fillable = [
-        'sale_id', 'product_id',
+        'product_id',
         'employee_id',
     ];
 

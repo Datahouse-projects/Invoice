@@ -15,10 +15,10 @@ class CreateInvoiceProductsTable extends Migration
     {
         Schema::create('invoice_products', function (Blueprint $table) {
             $table->increments('id');
-             $table->strings('name');
+             $table->string('name');
             $table->integer('price');
              $table->integer('warehouse_id');
-            $table->strings('quantity');
+            $table->string('quantity');
             $table->timestamps();
         });
     }
