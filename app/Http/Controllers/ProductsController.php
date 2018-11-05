@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Product;
 class ProductsController extends Controller
 {
     /**
@@ -11,9 +11,11 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     public function index()
     {
-        //
+    
+        $products= Product::latest()->paginate(5);
+        return view('products.index', compact('products'))->with('i',(request()->input('page',1) -1)*5);
     }
 
     /**
@@ -23,7 +25,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+      return view('products.create');
     }
 
     /**
@@ -34,7 +36,13 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         request()->validate([
+         'name' => 'required',
+         'quantity' =>  'required',
+         'price' => 'required',
+         ]);
+     Product::create($request->all());
+     return redirect()->route('products.index')->with('success','Product created successfully');
     }
 
     /**
@@ -45,7 +53,8 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+         $Product = Product::find($id);
+        return view('products.show', compact('products'));
     }
 
     /**
@@ -56,7 +65,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+         $product = Product::find($id);
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -68,7 +78,13 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+        'name' => 'required',
+        'quantity' =>  'required',
+        'price' => 'required',
+        ]);
+     Product::find($id)->update($request->all());
+     return redirect()->route('products.index')->with('success','Products Updated successfully');
     }
 
     /**
@@ -79,6 +95,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Product::find($id)->delete();
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully');   
     }
 }
+  

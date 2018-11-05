@@ -11,7 +11,7 @@ class EmployeesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
+    public function index()
     {
     
         $employees= Employee::latest()->paginate(5);
@@ -37,9 +37,11 @@ class EmployeesController extends Controller
     public function store(Request $request)
     {
          request()->validate([
-         'name' => 'required',
-         'secondname' =>  'required',
-        ]);
+         'fname' => 'required',
+         'sname' =>  'required',
+         'title' => 'required',
+         'contacts' =>  'required',
+         ]);
      Employee::create($request->all());
      return redirect()->route('employees.index')->with('success','Employees created successfully');
     }
@@ -78,8 +80,10 @@ class EmployeesController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-        'name' => 'required',
-         'secondname' =>  'required',
+        'fname' => 'required',
+        'sname' =>  'required',
+        'title' => 'required',
+        'contacts' =>  'required',
         ]);
      Employee::find($id)->update($request->all());
      return redirect()->route('employees.index')->with('success','Employee Updated successfully');

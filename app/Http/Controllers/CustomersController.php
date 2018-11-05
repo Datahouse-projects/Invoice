@@ -39,7 +39,7 @@ class CustomersController extends Controller
          request()->validate([
          'name' => 'required',
          'phone' =>  'required',
-        ]);
+         ]);
      Customer::create($request->all());
      return redirect()->route('customers.index')->with('success','Customer created successfully');
     }
@@ -79,7 +79,8 @@ class CustomersController extends Controller
     {
         request()->validate([
         'name' => 'required',
-         'phone' =>  'required',
+        'phone' =>  'required',
+    
         ]);
      Customer::find($id)->update($request->all());
      return redirect()->route('customers.index')->with('success','Customer Updated successfully');

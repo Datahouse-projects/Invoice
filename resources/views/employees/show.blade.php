@@ -1,4 +1,4 @@
-@extends('emplpyees.master')
+@extends('employees.master')
 @section('content')
  <div class="row">
    <div class="col-lg-12">
@@ -9,24 +9,43 @@
     </div>
 
 
-   @foreach ($employees as $employee)
+  
+   @foreach ($employees as $employee)  
     <div class="row">
   <div class="col-xs-12">
     <div class="form-group">
      <strong>First Name: </strong>
-     {{ $employee->name }}
+     {{ $employee->fname }}
      </div>
     </div>
    </div>
 
+ 
+
+    <div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+     <strong>Second Name: </strong>
+     {{ $employee->sname }}
+     </div>
+    </div>
+   </div>
+
+    <div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+     <strong>Title: </strong>
+     {{ $employee->title }}
+     </div>
+    </div>
+   </div>
         <div class="row">
   <div class="col-xs-12">
     <div class="form-group">
-     <strong>Second name: </strong>
-     {{ $employee->secondname }}
+     <strong>Contacts: </strong>
+     {{ $employee->contacts }}
      </div>
     </div>
       @endforeach
    </div>
-
-   @endsection
+  @endsection

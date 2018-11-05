@@ -20,6 +20,8 @@
 		<th width="5px">NO</th>
 		<th>Name</th>
 		<th>Second Name</th>
+    <th>Title</th>
+    <th>Contacts</th>
 		<th width="300px">Actions</th>
 		</tr>
 
@@ -27,8 +29,10 @@
    @foreach ($employees as $employee)  
    <tr>
    <td> {{ ++$i }}</td>
-   <td>{{ $employee->name }}</td>
-   <td>{{ $employee->secondname }}</td>
+   <td>{{ $employee->fname }}</td>
+   <td>{{ $employee->sname }}</td>
+    <td>{{ $employee->title }}</td>
+   <td>{{ $employee->contacts }}</td>
     <td width="2px">
     	<a class="btn btn-xs btn-info" href="{{ route('employees.show', $employee->id) }}">Show</a>
    

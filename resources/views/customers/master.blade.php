@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Employee</title>
+  <title>CUSTOMERS</title>
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href=>

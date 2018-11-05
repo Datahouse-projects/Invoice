@@ -8,8 +8,9 @@ class Employee extends Model
 {
 	 protected $table ='invoice_employees';
       protected $fillable = [
-         'name',
-        'secondname', 
+        'fname',
+        'sname', 
+        'title',
+        'contacts',
     ];
-
 }

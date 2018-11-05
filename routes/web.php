@@ -15,9 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('employees','EmployeesController');
-Route::resource('sales','SalesController');
 Route::resource('customers','CustomersController');
-Route::resource('warehouses','WarehousesController');
-Route::resource('invoicedetails','InvoicedetailsController');
-Route::resource('invoices','InvoicessController');
+Route::resource('employees','EmployeesController');
+Route::resource('order_details','OrderdetailsController');
+Route::resource('payments','PaymentsController');
+Route::resource('companies','CompaniesController');
+Route::resource('products','ProductsController');
+Route::resource('orders','OrdersController');

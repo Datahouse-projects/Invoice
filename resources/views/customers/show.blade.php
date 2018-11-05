@@ -1,4 +1,4 @@
-@extends('customer.master')
+@extends('customers.master')
 @section('content')
  <div class="row">
    <div class="col-lg-12">

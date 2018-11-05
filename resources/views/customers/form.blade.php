@@ -12,7 +12,7 @@
      </div>
      </div>
      <div class="col-xs-12">
-     <a class=" btn btn-xs btn-success" href="{{ route('employees.index') }}">Back</a>
+     <a class=" btn btn-xs btn-success" href="{{ route('customers.index') }}">Back</a>
      <button type="submit" class="btn btn-xs btn-primary" name="button">Submit</button>
      </div>
      </div>

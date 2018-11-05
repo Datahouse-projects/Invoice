@@ -4,7 +4,7 @@
  <div class="row">
    <div class="col-lg-12">
      <div class="pull-left">
-     <h3>Add new </h3>
+     <h3>Add new Employee</h3>
      </div>
      </div>
      </div>
